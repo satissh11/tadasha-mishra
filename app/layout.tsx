@@ -2,15 +2,18 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import NavbarScroll from "./components/NavbarScroll";
+import ScrollReveal from "./components/ScrollReveal";
+import ScrollProgress from "./components/ScrollProgress";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Official Dashboard | Senior Law Enforcement Leader",
-  description: "Maintaining law and order, operational oversight, and strategic policing leadership in Jharkhand.",
+  title: "Tadasha Mishra | Special DGP, CID Jharkhand",
+  description: "Official institutional profile of Tadasha Mishra, Special Director General of Police, CID, Jharkhand — law enforcement leadership and public safety.",
   openGraph: {
-    title: "Official Dashboard | Senior Law Enforcement Leader",
+    title: "Tadasha Mishra | Special DGP, CID Jharkhand",
     description: "Maintaining law and order, operational oversight, and strategic policing leadership in Jharkhand.",
     type: "profile",
   }
@@ -32,24 +35,28 @@ export default function RootLayout({
       addressRegion: 'Jharkhand',
       addressCountry: 'IN',
     },
-    url: 'https://official-record.in', // Placeholder URL
+    url: 'https://official-record.in',
   };
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} fade-in`}>
+      <body className={`${inter.variable} ${playfair.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <header className="navbar">
+
+        {/* Scroll progress bar — fixed at very top */}
+        <ScrollProgress />
+
+        {/* ── Navbar: centered links only, no brand text ── */}
+        <header className="navbar" id="site-navbar">
+          {/* Saffron + navy gradient top accent bar */}
+          <div style={{ height: "3px", background: "linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%)" }} />
           <nav className="container nav-container" aria-label="Main Navigation">
-            <div style={{ fontWeight: 600, letterSpacing: "0.05em" }}>
-              <Link href="/" aria-label="Official Record Home">Tadasha Mishra</Link>
-            </div>
             <div className="nav-links" role="menubar">
-              <Link href="/" role="menuitem">Home</Link>
-              <Link href="/about" role="menuitem">About</Link>
+              <Link href="/"        role="menuitem">Home</Link>
+              <Link href="/about"   role="menuitem">About</Link>
               <Link href="/service" role="menuitem">Service</Link>
               <Link href="/writings" role="menuitem">Writings</Link>
               <Link href="/gallery" role="menuitem">Gallery</Link>
@@ -57,24 +64,37 @@ export default function RootLayout({
             </div>
           </nav>
         </header>
+
+        <NavbarScroll />
+
+        {/* Page content */}
         {children}
-        <footer role="contentinfo" style={{ backgroundColor: "lightgray", color: "#111111", padding: "2rem 0", marginTop: "6rem", fontSize: "0.875rem" }}>
-          <div className="container" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "2rem", alignItems: "center" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              <div style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600, color: "#555" }}>
-                Tadasha Mishra
+
+        {/* ── Footer: no nav links ── */}
+        <footer className="site-footer" role="contentinfo">
+          <div className="container">
+            <div className="footer-top">
+              <div>
+                <div className="footer-brand-name">Tadasha Mishra</div>
+                <div className="footer-brand-title">Special Director General of Police, CID · Jharkhand</div>
+                <div style={{ marginTop: "1.25rem" }}>
+                  <div className="footer-contact-line">Police Headquarters, Dhurwa, Ranchi, Jharkhand 834004</div>
+                  <div className="footer-contact-line">office@tadashamishra.in</div>
+                </div>
               </div>
-              <div style={{ fontFamily: "var(--font-playfair)", fontSize: "1.5rem", fontWeight: 600 }}>
-                Director General of Police, Jharkhand
+              <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", textAlign: "right", alignSelf: "flex-end" }}>
+                <p style={{ margin: 0 }}>Official Institutional Profile</p>
+                <p style={{ margin: 0 }}>Jharkhand Police</p>
               </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", color: "#333", fontSize: "0.875rem" }}>
-              <div>Police Headquarters, Ranchi, Jharkhand</div>
-              <div>office@tadashamishra.in</div>
-              <div>&copy; {new Date().getFullYear()} Tadasha Mishra</div>
+            <div className="footer-bottom">
+              <span>&copy; {new Date().getFullYear()} Tadasha Mishra. All rights reserved.</span>
+              <span>For emergencies dial 112</span>
             </div>
           </div>
         </footer>
+
+        <ScrollReveal />
       </body>
     </html>
   );
