@@ -22,20 +22,12 @@ export default function ContactPage() {
           <h2 className="page-section-heading">Directory</h2>
 
           {/* Office card */}
-          <div className="reveal" style={{
-            background: "var(--primary)",
-            color: "var(--primary-foreground)",
-            borderLeft: "5px solid var(--accent)",
-            padding: "2.5rem",
-            borderRadius: "8px",
-            boxShadow: "var(--shadow-md)",
-            marginBottom: "2rem",
-          }}>
-            <h3 style={{ fontSize: "1.05rem", marginBottom: "1rem", color: "rgba(255,153,51,0.95)" }}>
-              Office of the Special DGP, CID
+          <div className="reveal directory-card">
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "1rem", color: "var(--accent)" }}>
+              Office of the Special DGP, jharkhand
             </h3>
-            <address style={{ fontStyle: "normal", lineHeight: 1.8, opacity: 0.9 }}>
-              CID Headquarters<br />
+            <address style={{ fontStyle: "normal", lineHeight: 1.8, color: "#ffffff", fontWeight: 500 }}>
+              DGP Headquarters<br />
               Jharkhand Police<br />
               Dhurwa, Ranchi<br />
               Jharkhand 834004
